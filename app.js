@@ -1,3 +1,19 @@
+let listingCount = 0;
+
+function login() {
+  document.getElementById("loginScreen").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
+}
+
+function logout() {
+  location.reload();
+}
+
+function showPage(id) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
 document.getElementById("generateBtn").addEventListener("click", function() {
 
   const product = document.getElementById("product").value.trim();
@@ -6,55 +22,41 @@ document.getElementById("generateBtn").addEventListener("click", function() {
 
   if (!product || !buyer || !benefits) {
     document.getElementById("output").textContent =
-      "Please fill in all fields before generating your listing.";
+      "Please complete all fields before generating.";
     return;
   }
 
-  // Create a strong title
-  const title = `${product} for ${buyer} | High Quality Digital Download`;
+  listingCount++;
+  document.getElementById("countDisplay").textContent = listingCount;
 
-  // Create a description
-  const description = 
-`This ${product} is designed specifically for ${buyer} who want better results with less effort.
+  const score = Math.floor(80 + Math.random() * 15);
+  document.getElementById("scoreDisplay").textContent = score;
 
-With this product, you will:
+  const title = `${product} for ${buyer} | Instant Digital Download`;
+
+  const description =
+`This ${product} is designed for ${buyer}.
+
+Benefits:
 ${benefits.split("\n").map(b => "• " + b).join("\n")}
 
-This is a digital product. No physical item will be shipped.
+Instant digital access.`;
 
-Download instantly and start using today.`;
-
-  // Create SEO tags
-  const tags = [
-    product,
-    buyer,
-    "digital download",
-    "printable",
-    "instant download",
-    "etsy seller tool",
-    "business resource"
-  ].join(", ");
-
-  // Display output
   document.getElementById("output").textContent =
-`LISTING GENERATED SUCCESSFULLY
+`LISTING GENERATED
 
 TITLE:
 ${title}
 
-----------------------------------
+----------------------------
 
 DESCRIPTION:
 ${description}
 
-----------------------------------
-
-TAGS:
-${tags}
-
-----------------------------------
+----------------------------
 
 STATUS:
-Your listing is ready to publish.`;
+Optimization complete.
+`;
 
 });
