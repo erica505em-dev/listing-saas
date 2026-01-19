@@ -1,25 +1,27 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
   const loginBtn = document.getElementById("loginBtn");
   const loginScreen = document.getElementById("loginScreen");
   const app = document.getElementById("app");
 
-  // LOGIN FLOW
-  loginBtn.addEventListener("click", function () {
-    loginScreen.classList.add("hidden");
-    app.classList.remove("hidden");
+  const pages = document.querySelectorAll(".page");
+
+  // Force startup state
+  app.style.display = "none";
+  loginScreen.style.display = "flex";
+
+  loginBtn.addEventListener("click", () => {
+    loginScreen.style.display = "none";
+    app.style.display = "flex";
+
+    // SHOW DASHBOARD AFTER LOGIN
+    showPage("dashboard");
   });
 
 });
 
-// PAGE ROUTING
 function showPage(id) {
-  document.querySelectorAll(".page").forEach(p => {
-    p.classList.remove("active");
-  });
-
+  document.querySelectorAll(".page").forEach(p => p.style.display = "none");
   const page = document.getElementById(id);
-  if (page) {
-    page.classList.add("active");
-  }
+  if (page) page.style.display = "block";
 }
