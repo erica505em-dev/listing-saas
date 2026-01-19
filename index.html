@@ -8,66 +8,16 @@
 </head>
 <body>
 
-<div class="app">
+<h1>Listing Generator</h1>
 
- <section id="dashboard" class="page active">
-  <h1>Performance Dashboard</h1>
-  <div class="subtitle">Optimize your listings for higher ranking and conversion.</div>
+<input id="product" placeholder="Product name">
+<input id="buyer" placeholder="Buyer">
+<textarea id="benefits" placeholder="Benefits"></textarea>
 
-  <div class="card-grid">
-    <div class="card">
-      <h3>Listing Score</h3>
-      <div class="big" id="scoreDisplay">87</div>
-    </div>
-    <div class="card">
-      <h3>Listings Generated</h3>
-      <div class="big">3</div>
-    </div>
-    <div class="card">
-      <h3>Optimization Level</h3>
-      <div class="big">High</div>
-    </div>
-  </div>
+<button id="generateBtn">Generate Listing</button>
 
-  <div class="card">
-    <h3>Next Best Action</h3>
-    <p>Improve your first image headline to increase click-through rate.</p>
-  </div>
-</section>
+<pre id="output"></pre>
 
-  <main class="main">
-
-    <section id="dashboard" class="page active">
-      <h1>Dashboard</h1>
-      <p>Your SaaS is alive.</p>
-    </section>
-
-    <section id="generator" class="page">
-      <h1>Generator</h1>
-
-      <input id="product" placeholder="Product name">
-      <input id="buyer" placeholder="Buyer">
-      <textarea id="benefits" placeholder="Benefits"></textarea>
-
-      <button id="generateBtn">Generate Listing</button>
-
-      <pre id="output"></pre>
-    </section>
-
-    <section id="billing" class="page">
-      <h1>Billing</h1>
-      <p>Stripe integration later.</p>
-    </section>
-
-    <section id="settings" class="page">
-      <h1>Settings</h1>
-      <p>Profile controls later.</p>
-    </section>
-
-  </main>
-
-</div>
-
-<script src="app.js?v=7"></script>
+<script src="app.js"></script>
 </body>
 </html>
