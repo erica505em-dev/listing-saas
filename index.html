@@ -2,21 +2,77 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Listing SaaS</title>
+<title>Listing Optimization SaaS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<h1>Listing Generator</h1>
+<!-- LOGIN -->
+<div id="loginScreen" class="login">
+  <h2>Listing Optimization System</h2>
+  <input id="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+</div>
 
-<input id="product" placeholder="Product name">
-<input id="buyer" placeholder="Buyer">
-<textarea id="benefits" placeholder="Benefits"></textarea>
+<!-- APP -->
+<div id="app" class="app hidden">
 
-<button id="generateBtn">Generate Listing</button>
+  <aside class="sidebar">
+    <h2>Listing SaaS</h2>
+    <button onclick="showPage('dashboard')">Dashboard</button>
+    <button onclick="showPage('generator')">Generator</button>
+    <button onclick="showPage('billing')">Billing</button>
+    <button onclick="showPage('settings')">Settings</button>
+    <button onclick="logout()">Logout</button>
+  </aside>
 
-<pre id="output"></pre>
+  <main class="main">
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="page active">
+      <h1>Performance Dashboard</h1>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Listing Score</h3>
+          <div id="scoreDisplay" class="big">–</div>
+        </div>
+        <div class="card">
+          <h3>Listings Generated</h3>
+          <div id="countDisplay" class="big">0</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GENERATOR -->
+    <section id="generator" class="page">
+      <h1>Listing Generator</h1>
+
+      <input id="product" placeholder="Product name">
+      <input id="buyer" placeholder="Target buyer">
+      <textarea id="benefits" placeholder="Benefits (one per line)"></textarea>
+
+      <button id="generateBtn">Generate Listing</button>
+
+      <pre id="output"></pre>
+    </section>
+
+    <!-- BILLING -->
+    <section id="billing" class="page">
+      <h1>Billing</h1>
+      <p>Upgrade coming soon.</p>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="settings" class="page">
+      <h1>Settings</h1>
+      <p>Profile settings coming soon.</p>
+    </section>
+
+  </main>
+</div>
 
 <script src="app.js"></script>
 </body>
