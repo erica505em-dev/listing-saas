@@ -1,248 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listing Packet Generator - Etsy Seller Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<title>Listing SaaS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Login Screen -->
-    <div id="login-screen" class="login-screen active">
-        <div class="login-container">
-            <div class="login-card">
-                <h1 class="login-title">Listing Packet Generator</h1>
-                <p class="login-subtitle">Create professional Etsy listings in seconds</p>
-                
-                <form id="login-form" class="login-form">
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" placeholder="you@example.com" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary btn-full">Sign In</button>
-                </form>
-                
-                <div class="login-footer">
-                    <p>Don't have an account? <a href="#" id="signup-toggle">Create one</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- App Shell -->
-    <div id="app-shell" class="app-shell hidden">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h2 class="sidebar-title">LPG</h2>
-                <button id="sidebar-toggle" class="sidebar-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
+<div class="app">
 
-            <nav class="sidebar-nav">
-                <a href="#dashboard" class="nav-link active" data-route="dashboard">
-                    <span class="nav-icon">📊</span>
-                    <span class="nav-label">Dashboard</span>
-                </a>
-                <a href="#generator" class="nav-link" data-route="generator">
-                    <span class="nav-icon">✨</span>
-                    <span class="nav-label">Generator</span>
-                </a>
-                <a href="#billing" class="nav-link" data-route="billing">
-                    <span class="nav-icon">💳</span>
-                    <span class="nav-label">Billing</span>
-                </a>
-                <a href="#settings" class="nav-link" data-route="settings">
-                    <span class="nav-icon">⚙️</span>
-                    <span class="nav-label">Settings</span>
-                </a>
-            </nav>
+  <aside class="sidebar">
+    <h2>Listing SaaS</h2>
+    <button onclick="showPage('dashboard')">Dashboard</button>
+    <button onclick="showPage('generator')">Generator</button>
+    <button onclick="showPage('billing')">Billing</button>
+    <button onclick="showPage('settings')">Settings</button>
+  </aside>
 
-            <div class="sidebar-footer">
-                <button id="logout-btn" class="btn btn-secondary btn-full">Logout</button>
-            </div>
-        </aside>
+  <main class="main">
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Topbar -->
-            <header class="topbar">
-                <div class="topbar-left">
-                    <h1 id="page-title" class="page-title">Dashboard</h1>
-                </div>
-                <div class="topbar-right">
-                    <div class="user-menu">
-                        <span id="user-name" class="user-name">User</span>
-                        <button id="user-avatar" class="user-avatar">👤</button>
-                    </div>
-                </div>
-            </header>
+    <section id="dashboard" class="page active">
+      <h1>Dashboard</h1>
+      <p>Your SaaS is alive.</p>
+    </section>
 
-            <!-- Content Area -->
-            <main class="content">
-                <!-- Dashboard Page -->
-                <section id="dashboard-page" class="page active">
-                    <div class="dashboard-header">
-                        <h2>Welcome to Listing Packet Generator</h2>
-                        <p>Streamline your Etsy listing creation process</p>
-                    </div>
+    <section id="generator" class="page">
+      <h1>Generator</h1>
 
-                    <div class="dashboard-grid">
-                        <div class="stat-card">
-                            <div class="stat-label">Listings Generated</div>
-                            <div class="stat-value">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Current Plan</div>
-                            <div class="stat-value" id="plan-display">Free</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Templates Available</div>
-                            <div class="stat-value" id="templates-count">3</div>
-                        </div>
-                    </div>
+      <input id="product" placeholder="Product name">
+      <input id="buyer" placeholder="Buyer">
+      <textarea id="benefits" placeholder="Benefits"></textarea>
 
-                    <div class="dashboard-section">
-                        <h3>Quick Actions</h3>
-                        <div class="action-buttons">
-                            <button class="btn btn-primary" onclick="navigateTo('generator')">Create New Listing</button>
-                            <button class="btn btn-secondary" onclick="navigateTo('billing')">View Plans</button>
-                        </div>
-                    </div>
+      <button id="generateBtn">Generate Listing</button>
 
-                    <div class="dashboard-section">
-                        <h3>Free Plan Features</h3>
-                        <ul class="feature-list">
-                            <li>✓ Up to 3 listings per month</li>
-                            <li>✓ Basic templates</li>
-                            <li>✓ Standard support</li>
-                            <li>✗ Advanced AI suggestions (Pro)</li>
-                            <li>✗ Unlimited listings (Pro)</li>
-                        </ul>
-                    </div>
-                </section>
+      <pre id="output"></pre>
+    </section>
 
-                <!-- Generator Page -->
-                <section id="generator-page" class="page">
-                    <div class="generator-header">
-                        <h2>Listing Generator</h2>
-                        <p>Create your Etsy listing packet</p>
-                    </div>
+    <section id="billing" class="page">
+      <h1>Billing</h1>
+      <p>Stripe integration later.</p>
+    </section>
 
-                    <div class="generator-container">
-                        <div class="generator-form">
-                            <div class="form-group">
-                                <label for="product-name">Product Name</label>
-                                <input type="text" id="product-name" placeholder="Enter product name" required>
-                            </div>
+    <section id="settings" class="page">
+      <h1>Settings</h1>
+      <p>Profile controls later.</p>
+    </section>
 
-                            <div class="form-group">
-                                <label for="product-description">Description</label>
-                                <textarea id="product-description" placeholder="Describe your product" rows="5"></textarea>
-                            </div>
+  </main>
 
-                            <div class="form-group">
-                                <label for="product-price">Price ($)</label>
-                                <input type="number" id="product-price" placeholder="0.00" step="0.01" required>
-                            </div>
+</div>
 
-                            <div class="form-group pro-feature">
-                                <label for="ai-suggestions">
-                                    AI Suggestions <span class="pro-badge">PRO</span>
-                                </label>
-                                <input type="checkbox" id="ai-suggestions" disabled>
-                                <small>Unlock AI-powered listing optimization</small>
-                            </div>
-
-                            <button type="button" class="btn btn-primary btn-full" onclick="generateListing()">Generate Listing</button>
-                        </div>
-
-                        <div class="generator-preview" id="generator-preview">
-                            <p class="preview-placeholder">Your listing preview will appear here</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Billing Page -->
-                <section id="billing-page" class="page">
-                    <div class="billing-header">
-                        <h2>Billing & Plans</h2>
-                        <p>Choose the perfect plan for your Etsy business</p>
-                    </div>
-
-                    <div class="pricing-grid">
-                        <!-- Free Plan -->
-                        <div class="pricing-card free-plan">
-                            <div class="plan-header">
-                                <h3>Free</h3>
-                                <div class="plan-price">$0<span>/month</span></div>
-                            </div>
-                            <div class="plan-features">
-                                <ul>
-                                    <li>✓ 3 listings/month</li>
-                                    <li>✓ Basic templates</li>
-                                    <li>✓ Email support</li>
-                                    <li>✗ AI suggestions</li>
-                                    <li>✗ Priority support</li>
-                                </ul>
-                            </div>
-                            <button class="btn btn-secondary btn-full" disabled>Current Plan</button>
-                        </div>
-
-                        <!-- Pro Plan -->
-                        <div class="pricing-card pro-plan">
-                            <div class="plan-badge">Most Popular</div>
-                            <div class="plan-header">
-                                <h3>Pro</h3>
-                                <div class="plan-price">$29<span>/month</span></div>
-                            </div>
-                            <div class="plan-features">
-                                <ul>
-                                    <li>✓ Unlimited listings</li>
-                                    <li>✓ Premium templates</li>
-                                    <li>✓ AI suggestions</li>
-                                    <li>✓ Advanced analytics</li>
-                                    <li>✓ Priority support</li>
-                                </ul>
-                            </div>
-                            <button class="btn btn-primary btn-full" id="upgrade-btn" onclick="showUpgradeModal()">Upgrade to Pro</button>
-                        </div>
-                    </div>
-                </section>
-            </main>
-        </div>
-    </div>
-
-    <!-- Upgrade Modal -->
-    <div id="upgrade-modal" class="modal hidden">
-        <div class="modal-overlay" onclick="closeUpgradeModal()"></div>
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeUpgradeModal()">×</button>
-            <div class="modal-header">
-                <h2>Upgrade to Pro</h2>
-                <p>Unlock unlimited listings and AI-powered features</p>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="closeUpgradeModal()">Cancel</button>
-                <button class="btn btn-primary" onclick="processUpgrade()">Upgrade Now - $29/month</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script src="storage.js"></script>
-    <script src="auth.js"></script>
-    <script src="dashboard.js"></script>
-    <script src="billing.js"></script>
-    <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
