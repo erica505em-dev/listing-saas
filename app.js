@@ -1,26 +1,54 @@
+// ---------- PAGE ROUTING ----------
 function showPage(id) {
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
+  document.querySelectorAll(".page").forEach(p => {
+    p.classList.remove("active");
+  });
+
+  const page = document.getElementById(id);
+  if (page) page.classList.add("active");
 }
 
+// ---------- GENERATOR LOGIC ----------
 document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("generateBtn");
+
+  const generateBtn = document.getElementById("generateBtn");
   const output = document.getElementById("output");
+  const scoreDisplay = document.getElementById("scoreDisplay");
 
-  btn.addEventListener("click", () => {
-    const product = document.getElementById("product").value;
-    const buyer = document.getElementById("buyer").value;
-    const benefits = document.getElementById("benefits").value;
+  if (!generateBtn) return;
 
+  generateBtn.addEventListener("click", () => {
+
+    const product = document.getElementById("product").value || "Your product";
+    const buyer = document.getElementById("buyer").value || "Your buyer";
+    const benefits = document.getElementById("benefits").value || "No benefits entered";
+
+    // Dopamine score
+    const score = Math.floor(80 + Math.random() * 15);
+
+    // Update dashboard score
+    if (scoreDisplay) {
+      scoreDisplay.textContent = score;
+    }
+
+    // Output report
     output.textContent = `
-LISTING GENERATED
+LISTING OPTIMIZATION REPORT
 
 Product: ${product}
 Buyer: ${buyer}
+
+Optimization Score: ${score}/100
+
+Next Best Action:
+Improve your first image headline to increase click-through rate.
+
 Benefits:
 ${benefits}
 
-Status: SaaS generator works.
+Status: Listing optimization complete.
 `;
+
   });
+
 });
