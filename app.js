@@ -1,99 +1,67 @@
 document.addEventListener("DOMContentLoaded", () => {
+
   const loginScreen = document.getElementById("loginScreen");
   const loginBtn = document.getElementById("loginBtn");
-  const app = document.getElementById("app");
-
-  // Make sure app is hidden until login
-  app.style.display = "none";
+  const pages = document.querySelectorAll(".page");
+  const navButtons = document.querySelectorAll(".sidebar button");
 
   // LOGIN
   loginBtn.addEventListener("click", () => {
-    loginScreen.style.display = "none";
-    app.style.display = "flex";
-    showPage("dashboard"); // show dashboard immediately
+    loginScreen.remove();
+    showPage("dashboard");
   });
 
-  // GENERATOR BUTTON
+  // NAVIGATION
+  navButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const page = btn.dataset.page;
+      showPage(page);
+    });
+  });
+
+  // GENERATOR
   const generateBtn = document.getElementById("generateBtn");
   if (generateBtn) {
     generateBtn.addEventListener("click", generateListing);
   }
-});
 
-/**
- * ROUTER: works with your HTML onclick="showPage('generator')"
- * Needs to be GLOBAL.
- */
-function showPage(id) {
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  const target = document.getElementById(id);
-  if (target) target.classList.add("active");
-}
-window.showPage = showPage;
-
-/**
- * Generator logic (safe)
- */
-function generateListing() {
-  const productEl = document.getElementById("product");
-  const buyerEl = document.getElementById("buyer");
-  const benefitsEl = document.getElementById("benefits");
-  const output = document.getElementById("output");
-
-  if (!output) return;
-
-  const product = (productEl?.value || "").trim();
-  const buyer = (buyerEl?.value || "").trim();
-  const benefitsRaw = (benefitsEl?.value || "").trim();
-
-  if (!product || !buyer || !benefitsRaw) {
-    output.textContent = "Please complete Product, Buyer, and Benefits before generating.";
-    return;
+  function showPage(id) {
+    pages.forEach(p => p.style.display = "none");
+    const target = document.getElementById(id);
+    if (target) target.style.display = "block";
   }
 
-  const score = Math.floor(80 + Math.random() * 16);
-  const scoreEl = document.getElementById("scoreDisplay");
-  if (scoreEl) scoreEl.textContent = String(score);
+  function generateListing() {
+    const product = document.getElementById("product").value.trim();
+    const buyer = document.getElementById("buyer").value.trim();
+    const benefits = document.getElementById("benefits").value.trim();
+    const output = document.getElementById("output");
 
-  const countEl = document.getElementById("countDisplay");
-  if (countEl) {
-    const current = parseInt(countEl.textContent || "0", 10) || 0;
-    countEl.textContent = String(current + 1);
-  }
+    if (!product || !buyer || !benefits) {
+      output.textContent = "Please complete all fields before generating.";
+      return;
+    }
 
-  const benefits = benefitsRaw
-    .split("\n")
-    .map(b => b.trim())
-    .filter(Boolean)
-    .map(b => `• ${b}`)
-    .join("\n");
+    const formattedBenefits = benefits
+      .split("\n")
+      .map(b => "• " + b.trim())
+      .join("\n");
 
-  const title = `${product} for ${buyer} | Instant Digital Download`;
-
-  const description =
-`This ${product} is built for ${buyer}.
-
-What you get:
-${benefits}
-
-Digital download. Instant access after purchase.`;
-
-  output.textContent =
-`LISTING GENERATED ✅
-
-SCORE: ${score}/100
+    output.textContent =
+`LISTING GENERATED
 
 TITLE:
-${title}
-
-----------------------------
+${product} for ${buyer} | Instant Digital Download
 
 DESCRIPTION:
-${description}
+This ${product} is designed for ${buyer}.
 
-----------------------------
+Benefits:
+${formattedBenefits}
 
 STATUS:
 Ready to publish.
 `;
-}
+  }
+
+});
