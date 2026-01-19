@@ -147,3 +147,21 @@ textarea { min-height:100px; }
   inset:0;
   pointer-events:none;
 }
+.login-brand {
+  color:#F5C77A;
+  letter-spacing:1px;
+  margin-bottom:4px;
+}
+
+.login-tagline {
+  font-size:12px;
+  color:#94A3B8;
+  letter-spacing:.6px;
+  margin-bottom:18px;
+}
+
+.login-note {
+  font-size:11px;
+  color:#64748B;
+  margin-top:10px;
+}
