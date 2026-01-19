@@ -6,10 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
-<!-- LOGIN SCREEN -->
 <div id="loginScreen" class="login">
   <h2>Listing Optimization System</h2>
   <input id="email" placeholder="Email">
@@ -17,29 +15,26 @@
   <button id="loginBtn">Login</button>
 </div>
 
-<!-- APP -->
-<div id="app" class="app hidden">
+<div id="app" class="app">
 
-  <!-- SIDEBAR -->
   <aside class="sidebar">
-    <h2>Listing SaaS</h2>
-    <button onclick="showPage('dashboard')">Dashboard</button>
-    <button onclick="showPage('generator')">Generator</button>
-    <button onclick="showPage('billing')">Billing</button>
-    <button onclick="showPage('settings')">Settings</button>
+    <h3>Listing SaaS</h3>
+    <button data-page="dashboard">Dashboard</button>
+    <button data-page="generator">Generator</button>
+    <button data-page="billing">Billing</button>
+    <button data-page="settings">Settings</button>
   </aside>
 
-  <!-- MAIN -->
   <main class="main">
 
-    <section id="dashboard" class="page active">
+    <section id="dashboard" class="page">
       <h1>Dashboard</h1>
-      <p>Welcome to your SaaS dashboard.</p>
+      <p>Dashboard loaded.</p>
     </section>
 
     <section id="generator" class="page">
       <h1>Generator</h1>
-      <p>Generator page loaded.</p>
+      <p>Generator loaded.</p>
     </section>
 
     <section id="billing" class="page">
