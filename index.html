@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Ericassetapartstudio SaaS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
 body{margin:0;font-family:Arial;background:#0B0F1A;color:#E5E7EB}
 .login{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;background:#0B0F1A;z-index:10}
@@ -24,170 +26,177 @@ footer{border-top:1px solid #1E293B;margin-top:20px;padding-top:10px;color:#94A3
 .big{font-size:36px;color:#F5C77A;font-weight:bold}
 </style>
 </head>
+
 <body>
 
+<!-- LOGIN -->
 <div id="login" class="login">
   <div class="login-box">
-   <h2>Ericassetapartstudio™</h2>
-<p style="font-size:12px;color:#94A3B8">Where listings become conversion systems.</p>
+    <h2>Ericassetapartstudio™</h2>
+    <p style="font-size:12px;color:#94A3B8">Where listings become conversion systems.</p>
 
     <input id="email" placeholder="Email">
     <input id="password" type="password" placeholder="Password">
 
     <button id="loginBtn" class="primary">Access Strategy Console</button>
-
-    <p class="login-note">
-      Private AI strategist access.
-    </p>
   </div>
 </div>
 
+<!-- APP -->
 <div id="app" class="app">
+
+  <!-- SIDEBAR -->
   <div class="sidebar">
-<button class="nav active" data="dash">Performance</button>
-<button class="nav" data="gen">Create</button>
-<button class="nav" data="bill">Unlock</button>
-<button class="nav" data="set">Control</button>
+    <button class="nav active" data="dash">Performance</button>
+    <button class="nav" data="gen">Create</button>
+    <button class="nav" data="bill">Unlock</button>
+    <button class="nav" data="set">Control</button>
+
     <p style="margin-top:20px;font-size:12px">Plan: <span id="plan">Free</span></p>
   </div>
 
+  <!-- MAIN -->
   <div class="main">
-    <header>
-      <h2>Ericassetapartstudio</h2>
-      <p style="font-size:12px;color:#94A3B8">Digital Product Intelligence Platform</p>
-    </header>
 
-   <section id="dash">
+<header>
+  <h2>Ericassetapartstudio™</h2>
+  <p style="font-size:12px;color:#94A3B8">Where listings become conversion systems.</p>
+</header>
 
-  <div class="hero-card">
-    <p class="hero-title">Your Optimization Score</p>
- <div class="hero-score"><span id="score">—</span> <span>/ 100</span></div>
-    <p class="hero-sub">You’re outperforming 87% of sellers.</p>
+<!-- DASHBOARD -->
+<section id="dash">
+  <h3>Your Optimization Score</h3>
+  <div class="big"><span id="score">—</span> / 100</div>
+  <p>You’re outperforming 87% of sellers.</p>
 
-    <p class="hero-status">
-      Optimization Level: <span class="status-advanced">Advanced</span><br>
-      <span class="hero-hint">One improvement away from Elite.</span>
-    </p>
-  </div>
-
-  <div class="row" style="margin-top:30px">
-
-    <div class="card">
-      <h3>Your Momentum</h3>
-    <p>Listings Generated: <strong id="count">0</strong></p>
-      <p>Conversion Potential: <strong>High</strong></p>
-      <p>Next Upgrade: <strong>Image headline</strong></p>
-    </div>
-
-    <div class="card">
-      <h3>Strategic Insight</h3>
-      <p>
-        Your hero image headline is limiting emotional trust.  
-        A refined headline could increase click-through authority.
-      </p>
-    </div>
-
-  </div>
-
-  <div class="next-move">
-    <h3>AI Recommendation</h3>
-    <p>Execute a headline refinement to elevate buyer perception.</p>
-    <button class="primary">Execute Strategy</button>
-  </div>
-
+  <p>Listings Generated: <strong id="count">0</strong></p>
 </section>
 
-    <section id="gen" class="hidden">
-      <h3>Listing Generator</h3>
-      <input id="product" placeholder="Product name">
-      <input id="buyer" placeholder="Target buyer">
-      <textarea id="benefits" placeholder="Benefits (one per line)"></textarea>
-      <button id="generate" class="primary">Generate</button>
+<!-- GENERATOR -->
+<section id="gen" class="hidden">
+  <h3>Listing Generator</h3>
 
-      <div class="row">
-        <button id="copy">Copy</button>
-        <button id="download">Download</button>
-      </div>
+  <input id="product" placeholder="Product name">
+  <input id="buyer" placeholder="Target buyer">
+  <textarea id="benefits" placeholder="Benefits (one per line)"></textarea>
 
-      <pre id="out" class="output">Waiting for generation...</pre>
-    </section>
+  <button id="generate" class="primary">Generate</button>
 
-    <section id="bill" class="hidden">
-      <h3>Billing</h3>
-      <p>Upgrade to Premium</p>
-      <button id="upgrade" class="primary">Upgrade (Stripe later)</button>
-    </section>
+  <div class="row">
+    <button id="copy">Copy</button>
+    <button id="download">Download</button>
+  </div>
 
-    <section id="set" class="hidden">
-      <h3>Settings</h3>
-      <p>Brand locked</p>
-    </section>
+  <pre id="out" class="output">Waiting for generation...</pre>
+</section>
+
+<!-- BILLING -->
+<section id="bill" class="hidden">
+  <h3>Billing</h3>
+  <p>Upgrade to Premium</p>
+  <button id="upgrade" class="primary">Upgrade (Stripe later)</button>
+</section>
+
+<!-- SETTINGS -->
+<section id="set" class="hidden">
+  <h3>Settings</h3>
+  <p>Brand locked.</p>
+</section>
 
 <footer>
-  Built with strategy by Ericassetapartstudio™<br>
-  © 2026 Ericassetapartstudio. All rights reserved.
+Built with strategy by Ericassetapartstudio™<br>
+© 2026 Ericassetapartstudio. All rights reserved.
 </footer>
+
+</div>
 </div>
 
+<!-- JS -->
 <script>
-var plan="free";
+let plan = "free";
+
+// LOGIN
+document.getElementById("loginBtn").addEventListener("click", () => {
+  document.getElementById("login").style.display = "none";
+  document.getElementById("app").style.display = "flex";
+});
+
+// NAV
+document.querySelectorAll(".nav").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".nav").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    show(btn.getAttribute("data"));
+  });
+});
 
 function show(id){
-  ["dash","gen","bill","set"].forEach(x=>document.getElementById(x).classList.add("hidden"));
+  ["dash","gen","bill","set"].forEach(x=>{
+    document.getElementById(x).classList.add("hidden");
+  });
   document.getElementById(id).classList.remove("hidden");
 }
 
-document.getElementById("loginBtn").onclick=function(){
-  document.getElementById("login").style.display="none";
-  document.getElementById("app").style.display="flex";
-};
+// GENERATE
+document.getElementById("generate").addEventListener("click", () => {
 
-document.querySelectorAll(".nav").forEach(b=>{
-  b.onclick=function(){
-    document.querySelectorAll(".nav").forEach(x=>x.classList.remove("active"));
-    b.classList.add("active");
-    show(b.getAttribute("data"));
-  };
-});
-
-document.getElementById("generate").onclick=function(){
-  if(plan!=="premium"){
-    document.getElementById("out").textContent="Upgrade to Premium to use generator.";
+  if(plan !== "premium"){
+    document.getElementById("out").textContent =
+      "Upgrade to Premium to use generator.";
     show("bill");
     return;
   }
 
-  var p=product.value;
-  var b=buyer.value;
-  var ben=benefits.value.split("\n");
+  const product = document.getElementById("product").value || "Your Product";
+  const buyer = document.getElementById("buyer").value || "Your Buyer";
+  const benefits = document.getElementById("benefits").value.split("\n");
 
-  var txt="TITLE:\\n"+p+" for "+b+"\\n\\nDESCRIPTION:\\n";
-  ben.forEach(x=>txt+="• "+x+"\\n");
+  let text =
+`AI STRATEGIC OUTPUT
 
-  out.textContent=txt;
+TITLE:
+${product} for ${buyer}
 
-  var s=Math.floor(80+Math.random()*18);
-  score.textContent=s;
-  count.textContent=parseInt(count.textContent)+1;
-};
+DESCRIPTION:
+`;
 
-copy.onclick=function(){
-  navigator.clipboard.writeText(out.textContent);
-  alert("Copied");
-};
+  benefits.forEach(b=>{
+    if(b.trim() !== "") text += "• " + b + "\n";
+  });
 
-download.onclick=function(){
-  var a=document.createElement("a");
-  a.href=URL.createObjectURL(new Blob([out.textContent],{type:"text/plain"}));
-  a.download="listing-pack.txt";
+  text += "\nSTATUS: Strategic optimization complete.";
+
+  document.getElementById("out").textContent = text;
+
+  const score = Math.floor(80 + Math.random()*18);
+  document.getElementById("score").textContent = score;
+
+  const countEl = document.getElementById("count");
+  countEl.textContent = parseInt(countEl.textContent) + 1;
+});
+
+// COPY
+document.getElementById("copy").addEventListener("click", () => {
+  navigator.clipboard.writeText(document.getElementById("out").textContent);
+  alert("Copied to clipboard");
+});
+
+// DOWNLOAD
+document.getElementById("download").addEventListener("click", () => {
+  const text = document.getElementById("out").textContent;
+  const blob = new Blob([text], { type:"text/plain" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "listing-pack.txt";
   a.click();
-};
+});
 
-upgrade.onclick=function(){
-  plan="premium";
-  document.getElementById("plan").textContent="Premium";
+// BILLING
+document.getElementById("upgrade").addEventListener("click", () => {
+  plan = "premium";
+  document.getElementById("plan").textContent = "Premium";
   alert("Premium unlocked");
-};
+});
 </script>
 
 </body>
