@@ -1,75 +1,53 @@
-let userPlan = "free";
+let listingCount = 0;
 
-function $(id){ return document.getElementById(id); }
+// LOGIN
+function forceLogin(){
+  document.getElementById("loginScreen").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
+}
 
+// LOGOUT
+function logout(){
+  document.getElementById("loginScreen").classList.remove("hidden");
+  document.getElementById("app").classList.add("hidden");
+}
+
+// PAGE NAVIGATION
+function showPage(page){
+  document.querySelectorAll(".page").forEach(p=>{
+    p.classList.remove("active");
+  });
+  document.getElementById(page).classList.add("active");
+}
+
+// GENERATE LISTING
 document.addEventListener("DOMContentLoaded",()=>{
 
-const loginBtn=$("loginBtn");
-const loginScreen=$("loginScreen");
-const navBtns=document.querySelectorAll(".nav-btn");
-const pages=document.querySelectorAll(".page");
+  const generateBtn = document.getElementById("generateBtn");
 
-const generateBtn=$("generateBtn");
-const output=$("output");
-const copyBtn=$("copyBtn");
-const downloadBtn=$("downloadBtn");
-const upgradeBtn=$("upgradeBtn");
+  if(generateBtn){
+    generateBtn.addEventListener("click",()=>{
 
-const scoreNumber=$("scoreNumber");
-const countDisplay=$("countDisplay");
-const planStatus=$("planStatus");
+      const product = document.getElementById("product").value || "Your Product";
+      const buyer = document.getElementById("buyer").value || "Your Buyer";
+      const benefits = document.getElementById("benefits").value.split("\n");
 
-loginBtn.onclick = () => {
-  loginScreen.remove();
-};
+      let output = `TITLE:\n${product} for ${buyer}\n\nDESCRIPTION:\n`;
 
-navBtns.forEach(btn=>{
-  btn.onclick=()=>{
-    navBtns.forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active");
-    pages.forEach(p=>p.classList.add("hidden"));
-    $(btn.dataset.page).classList.remove("hidden");
-  };
-});
+      benefits.forEach(b=>{
+        if(b.trim()!=="") output+=`• ${b}\n`;
+      });
 
-generateBtn.onclick=()=>{
-  if(userPlan!=="premium"){
-    output.textContent="Upgrade to Premium to unlock generator.";
-    document.querySelector('[data-page="billing"]').click();
-    return;
+      output += `\nSTATUS: Optimization complete.`;
+
+      document.getElementById("output").textContent = output;
+
+      const score = Math.floor(80 + Math.random()*18);
+      document.getElementById("scoreDisplay").textContent = score;
+
+      listingCount++;
+      document.getElementById("countDisplay").textContent = listingCount;
+    });
   }
-
-  const product=$("product").value;
-  const buyer=$("buyer").value;
-  const benefits=$("benefits").value.split("\n");
-
-  let txt=`TITLE:\n${product} for ${buyer}\n\nDESCRIPTION:\nBenefits:\n`;
-  benefits.forEach(b=>txt+=`• ${b}\n`);
-
-  output.textContent=txt;
-
-  const score=Math.floor(80+Math.random()*18);
-  scoreNumber.textContent=score;
-  countDisplay.textContent=parseInt(countDisplay.textContent)+1;
-};
-
-copyBtn.onclick=()=>{
-  navigator.clipboard.writeText(output.textContent);
-  alert("Copied!");
-};
-
-downloadBtn.onclick=()=>{
-  const blob=new Blob([output.textContent],{type:"text/plain"});
-  const a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);
-  a.download="listing-pack.txt";
-  a.click();
-};
-
-upgradeBtn.onclick=()=>{
-  userPlan="premium";
-  planStatus.textContent="Premium";
-  alert("Premium unlocked (Stripe placeholder)");
-};
 
 });
