@@ -1,53 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Listing Optimization SaaS</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
+document.addEventListener("DOMContentLoaded", () => {
 
-<div id="loginScreen" class="login">
-  <h2>Listing Optimization System</h2>
-  <input id="email" placeholder="Email">
-  <input id="password" type="password" placeholder="Password">
-  <button id="loginBtn">Login</button>
-</div>
+  const loginScreen = document.getElementById("loginScreen");
+  const loginBtn = document.getElementById("loginBtn");
+  const app = document.getElementById("app");
 
-<div id="app" class="app">
+  // LOGIN
+  if (loginBtn) {
+    loginBtn.addEventListener("click", () => {
+      loginScreen.remove();
+      app.style.display = "flex";
+      showPage("dashboard");
+    });
+  }
 
-  <aside class="sidebar">
-    <h3>Listing SaaS</h3>
-    <button data-page="dashboard">Dashboard</button>
-    <button data-page="generator">Generator</button>
-    <button data-page="billing">Billing</button>
-    <button data-page="settings">Settings</button>
-  </aside>
+  // SIDEBAR NAV
+  const navButtons = document.querySelectorAll(".sidebar button");
 
-  <main class="main">
+  navButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const page = btn.dataset.page;
+      showPage(page);
+    });
+  });
 
-    <section id="dashboard" class="page">
-      <h1>Dashboard</h1>
-      <p>Dashboard loaded.</p>
-    </section>
+});
 
-    <section id="generator" class="page">
-      <h1>Generator</h1>
-      <p>Generator loaded.</p>
-    </section>
-
-    <section id="billing" class="page">
-      <h1>Billing</h1>
-    </section>
-
-    <section id="settings" class="page">
-      <h1>Settings</h1>
-    </section>
-
-  </main>
-</div>
-
-<script src="app.js"></script>
-</body>
-</html>
+// PAGE ROUTER
+function showPage(id) {
+  document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+  const target = document.getElementById(id);
+  if (target) target.style.display = "block";
+}
