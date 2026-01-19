@@ -1,33 +1,79 @@
-document.addEventListener("DOMContentLoaded", () => {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ericassetapartstudio SaaS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-  const loginScreen = document.getElementById("loginScreen");
-  const loginBtn = document.getElementById("loginBtn");
-  const app = document.getElementById("app");
+<!-- LOGIN OVERLAY -->
+<div id="loginScreen" class="login">
+  <h2>Ericassetapartstudio</h2>
+  <input id="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
+  <button id="loginBtn">Login</button>
+</div>
 
-  // LOGIN
-  if (loginBtn) {
-    loginBtn.addEventListener("click", () => {
-      loginScreen.remove();
-      app.style.display = "flex";
-      showPage("dashboard");
-    });
-  }
+<!-- APP -->
+<div id="app" class="app">
 
-  // SIDEBAR NAV
-  const navButtons = document.querySelectorAll(".sidebar button");
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h3>Ericassetapartstudio</h3>
+    <button data-page="dashboard">Dashboard</button>
+    <button data-page="generator">Generator</button>
+    <button data-page="billing">Billing</button>
+    <button data-page="settings">Settings</button>
+  </aside>
 
-  navButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const page = btn.dataset.page;
-      showPage(page);
-    });
-  });
+  <!-- MAIN -->
+  <main class="main">
 
-});
+    <!-- HEADER -->
+    <header class="app-header">
+      <h1>Ericassetapartstudio</h1>
+      <p class="tagline">Digital Product Intelligence Platform</p>
+    </header>
 
-// PAGE ROUTER
-function showPage(id) {
-  document.querySelectorAll(".page").forEach(p => p.style.display = "none");
-  const target = document.getElementById(id);
-  if (target) target.style.display = "block";
-}
+    <!-- PAGES -->
+    <section id="dashboard" class="page">
+      <h2>Dashboard</h2>
+      <p>Welcome to your SaaS dashboard.</p>
+    </section>
+
+    <section id="generator" class="page">
+      <h2>Listing Generator</h2>
+
+      <input id="product" placeholder="Product name">
+      <input id="buyer" placeholder="Target buyer">
+      <textarea id="benefits" placeholder="Benefits (one per line)"></textarea>
+
+      <button id="generateBtn">Generate Listing</button>
+
+      <pre id="output"></pre>
+    </section>
+
+    <section id="billing" class="page">
+      <h2>Billing</h2>
+      <p>Billing management coming soon.</p>
+    </section>
+
+    <section id="settings" class="page">
+      <h2>Settings</h2>
+      <p>Account settings.</p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="app-footer">
+      <p>© 2026 Ericassetapartstudio. All rights reserved.</p>
+    </footer>
+
+  </main>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
