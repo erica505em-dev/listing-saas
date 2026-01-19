@@ -4,14 +4,22 @@ document.addEventListener("DOMContentLoaded", function () {
   const loginScreen = document.getElementById("loginScreen");
   const app = document.getElementById("app");
 
-  if (!loginBtn || !loginScreen || !app) {
-    alert("Login elements missing in HTML");
-    return;
-  }
-
+  // LOGIN FLOW
   loginBtn.addEventListener("click", function () {
-    loginScreen.style.display = "none";
-    app.style.display = "flex";
+    loginScreen.classList.add("hidden");
+    app.classList.remove("hidden");
   });
 
 });
+
+// PAGE ROUTING
+function showPage(id) {
+  document.querySelectorAll(".page").forEach(p => {
+    p.classList.remove("active");
+  });
+
+  const page = document.getElementById(id);
+  if (page) {
+    page.classList.add("active");
+  }
+}
