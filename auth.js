@@ -1,22 +1,39 @@
 const Auth = {
-    init() {
-        document.getElementById('login-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            window.Storage.saveSession({ email, name: email.split('@')[0] });
-            this.checkSession();
-        });
-        document.getElementById('logout-btn').addEventListener('click', () => {
-            window.Storage.clearSession();
-            this.checkSession();
-        });
+  init() {
+    const loginBtn = document.getElementById("loginBtn");
+
+    if(loginBtn){
+      loginBtn.addEventListener("click", () => {
+        const email = document.getElementById("email").value;
+
+        localStorage.setItem("session", JSON.stringify({
+          email,
+          name: email.split("@")[0]
+        }));
+
         this.checkSession();
-    },
-    checkSession() {
-        const session = window.Storage.getSession();
-        document.getElementById('login-screen').classList.toggle('hidden', !!session);
-        document.getElementById('app-shell').classList.toggle('hidden', !session);
-        if (session) document.getElementById('user-name').textContent = session.name;
+      });
     }
+
+    this.checkSession();
+  },
+
+  checkSession() {
+    const session = JSON.parse(localStorage.getItem("session"));
+
+    const loginScreen = document.getElementById("login");
+    const appShell = document.getElementById("app");
+
+    if(loginScreen && appShell){
+      loginScreen.style.display = session ? "none" : "flex";
+      appShell.style.display = session ? "flex" : "none";
+    }
+
+    if(session){
+      const nameBox = document.getElementById("user-name");
+      if(nameBox) nameBox.textContent = session.name;
+    }
+  }
 };
-document.addEventListener('DOMContentLoaded', () => Auth.init());
+
+document.addEventListener("DOMContentLoaded", () => Auth.init());
