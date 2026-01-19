@@ -19,8 +19,7 @@ const scoreNumber=$("scoreNumber");
 const countDisplay=$("countDisplay");
 const planStatus=$("planStatus");
 
-loginBtn.onclick=()=>{
-  if(!$("email").value||!$("password").value)return;
+loginBtn.onclick = () => {
   loginScreen.remove();
 };
 
