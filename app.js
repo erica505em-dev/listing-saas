@@ -2,28 +2,28 @@ let listingCount = 0;
 
 // LOGIN
 function forceLogin(){
-  document.getElementById("loginScreen").classList.add("hidden");
-  document.getElementById("app").classList.remove("hidden");
+  document.getElementById("login").style.display = "none";
+  document.getElementById("app").style.display = "flex";
 }
 
 // LOGOUT
 function logout(){
-  document.getElementById("loginScreen").classList.remove("hidden");
-  document.getElementById("app").classList.add("hidden");
+  document.getElementById("login").style.display = "flex";
+  document.getElementById("app").style.display = "none";
 }
 
 // PAGE NAVIGATION
 function showPage(page){
-  document.querySelectorAll(".page").forEach(p=>{
-    p.classList.remove("active");
+  ["dash","gen","bill","set"].forEach(id=>{
+    document.getElementById(id).classList.add("hidden");
   });
-  document.getElementById(page).classList.add("active");
+  document.getElementById(page).classList.remove("hidden");
 }
 
 // GENERATE LISTING
 document.addEventListener("DOMContentLoaded",()=>{
 
-  const generateBtn = document.getElementById("generateBtn");
+  const generateBtn = document.getElementById("generate");
 
   if(generateBtn){
     generateBtn.addEventListener("click",()=>{
@@ -32,21 +32,21 @@ document.addEventListener("DOMContentLoaded",()=>{
       const buyer = document.getElementById("buyer").value || "Your Buyer";
       const benefits = document.getElementById("benefits").value.split("\n");
 
-      let output = `TITLE:\n${product} for ${buyer}\n\nDESCRIPTION:\n`;
+      let outputText = `TITLE:\n${product} for ${buyer}\n\nDESCRIPTION:\n`;
 
       benefits.forEach(b=>{
-        if(b.trim()!=="") output+=`• ${b}\n`;
+        if(b.trim()!=="") outputText+=`• ${b}\n`;
       });
 
-      output += `\nSTATUS: Optimization complete.`;
+      outputText += `\nSTATUS: Optimization complete.`;
 
-      document.getElementById("output").textContent = output;
+      document.getElementById("out").textContent = outputText;
 
       const score = Math.floor(80 + Math.random()*18);
-      document.getElementById("scoreDisplay").textContent = score;
+      document.getElementById("score").textContent = score;
 
       listingCount++;
-      document.getElementById("countDisplay").textContent = listingCount;
+      document.getElementById("count").textContent = listingCount;
     });
   }
 
