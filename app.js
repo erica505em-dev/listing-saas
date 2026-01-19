@@ -1,29 +1,32 @@
 let listingCount = 0;
 
-// ---------- LOGIN ----------
+// LOGIN
 function forceLogin() {
-  document.getElementById("loginScreen").style.display = "none";
-  document.getElementById("app").style.display = "flex";
+  document.getElementById("loginScreen").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
 }
-window.forceLogin = forceLogin;
 
-// ---------- NAVIGATION ----------
+// LOGOUT
+function logout() {
+  location.reload();
+}
+
+// PAGE NAVIGATION
 function showPage(id) {
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
   const target = document.getElementById(id);
   if (target) target.classList.add("active");
 }
-window.showPage = showPage;
 
-// ---------- GENERATOR ----------
+// EXPOSE TO HTML
+window.forceLogin = forceLogin;
+window.showPage = showPage;
+window.logout = logout;
+
+// GENERATOR
 document.addEventListener("DOMContentLoaded", () => {
 
   const generateBtn = document.getElementById("generateBtn");
-
-  if (!generateBtn) {
-    console.log("❌ generateBtn not found");
-    return;
-  }
 
   generateBtn.addEventListener("click", () => {
 
