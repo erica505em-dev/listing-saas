@@ -1,335 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Ericassetapartstudio SaaS</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8">
+<title>Ericassetapartstudio SaaS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- LOGIN OVERLAY -->
-  <div id="loginScreen" class="login">
-    <div class="login-card">
-      <div class="login-brand">
-        <div class="logo-dot"></div>
-        <h2>Ericassetapartstudio</h2>
-      </div>
+<!-- LOGIN -->
+<div id="loginScreen" class="login">
+  <div class="login-card">
+    <h2>Ericassetapartstudio</h2>
+    <p class="login-sub">Digital Product Intelligence Platform</p>
+    <input id="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
+    <button id="loginBtn" class="btn btn-gradient">Login</button>
+    <p class="login-note">Demo mode — any email/password works</p>
+  </div>
+</div>
 
-      <p class="login-sub">Digital Product Intelligence Platform</p>
+<canvas id="confettiCanvas" class="confetti"></canvas>
 
-      <label class="field">
-        <span>Email</span>
-        <input id="email" autocomplete="email" placeholder="you@domain.com" />
-      </label>
+<div id="app" class="app">
 
-      <label class="field">
-        <span>Password</span>
-        <input id="password" type="password" autocomplete="current-password" placeholder="••••••••" />
-      </label>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h3 class="brand">Ericassetapartstudio</h3>
 
-      <button id="loginBtn" class="btn btn-primary">Login</button>
+    <button class="nav-btn active" data-page="dashboard">📊 Dashboard</button>
+    <button class="nav-btn" data-page="generator">⚡ Generator</button>
+    <button class="nav-btn" data-page="billing">💳 Billing</button>
+    <button class="nav-btn" data-page="settings">⚙️ Settings</button>
 
-      <p class="login-note">
-        Demo login: any email + any password.
-      </p>
+    <div class="sidebar-bottom">
+      <p class="mini">Status: <span id="planStatus">Free</span></p>
     </div>
-  </div>
+  </aside>
 
-  <!-- CONFETTI CANVAS -->
-  <canvas id="confettiCanvas" class="confetti"></canvas>
+  <!-- MAIN -->
+  <main class="main">
 
-  <!-- APP -->
-  <div id="app" class="app" aria-hidden="false">
+    <!-- HEADER -->
+    <header class="app-header">
+      <div>
+        <h1>Ericassetapartstudio</h1>
+        <p class="tagline">Digital Product Intelligence Platform</p>
+      </div>
+      <span id="headerBadge" class="badge">Ready</span>
+    </header>
 
-    <!-- SIDEBAR -->
-   <button class="nav-btn active" data-page="dashboard">
-  <span class="nav-pill"></span> 📊 Dashboard
-</button>
-<button class="nav-btn" data-page="generator">
-  <span class="nav-pill"></span> ⚡ Generator
-</button>
-<button class="nav-btn" data-page="billing">
-  <span class="nav-pill"></span> 💳 Billing
-</button>
-<button class="nav-btn" data-page="settings">
-  <span class="nav-pill"></span> ⚙️ Settings
-</button>
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="page">
+      <h2>Dashboard</h2>
 
-      <nav class="nav">
-        <button class="nav-btn active" data-page="dashboard">
-          <span class="nav-pill"></span> Dashboard
-        </button>
-        <button class="nav-btn" data-page="generator">
-          <span class="nav-pill"></span> Generator
-        </button>
-        <button class="nav-btn" data-page="billing">
-          <span class="nav-pill"></span> Billing
-        </button>
-        <button class="nav-btn" data-page="settings">
-          <span class="nav-pill"></span> Settings
-        </button>
-      </nav>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Listing Score</h3>
+          <div id="scoreNumber" class="big-number">—</div>
+        </div>
 
-      <div class="sidebar-bottom">
-        <div class="mini-card">
-          <div class="mini-title">Status</div>
-          <div class="mini-value">Active</div>
-          <div class="mini-sub">Premium build</div>
+        <div class="card">
+          <h3>Listings Generated</h3>
+          <div id="countDisplay" class="big-number">0</div>
         </div>
       </div>
-    </aside>
+    </section>
 
-    <!-- MAIN -->
-    <main class="main">
+    <!-- GENERATOR -->
+    <section id="generator" class="page hidden">
+      <h2>Listing Generator</h2>
 
-      <!-- HEADER (LOCKED) -->
-      <header class="app-header">
-        <div>
-          <h1>Ericassetapartstudio</h1>
-          <p class="tagline">Digital Product Intelligence Platform</p>
-        </div>
-        <div class="header-actions">
-          <span id="headerBadge" class="badge">Ready</span>
-        </div>
-      </header>
+      <input id="product" placeholder="Product name">
+      <input id="buyer" placeholder="Target buyer">
+      <textarea id="benefits" placeholder="Benefits (one per line)"></textarea>
 
-      <!-- PAGES -->
-      <section id="dashboard" class="page">
-        <h2 class="page-title">Dashboard</h2>
-        <p class="page-sub">Track performance, score, and listing output momentum.</p>
+      <div class="checks">
+        <label><input id="optTitle" type="checkbox" checked> Title</label>
+        <label><input id="optDesc" type="checkbox" checked> Description</label>
+        <label><input id="optTags" type="checkbox" checked> Tags</label>
+        <label><input id="optAlt" type="checkbox" checked> Alt Text</label>
+        <label><input id="optAccess" type="checkbox"> Access File</label>
+        <label><input id="optSocial" type="checkbox"> Social Captions</label>
+      </div>
 
-        <div class="grid-2">
-          <div class="card">
-            <div class="card-head">
-              <h3>Listing Score</h3>
-              <span class="chip chip-gold">Dopamine Gauge</span>
-            </div>
+      <button id="generateBtn" class="btn btn-gradient">Generate Optimized Listing</button>
 
-            <div class="gauge-wrap">
-              <svg class="gauge" viewBox="0 0 120 120" role="img" aria-label="Listing Score Gauge">
-                <circle class="gauge-bg" cx="60" cy="60" r="46"></circle>
-                <circle id="gaugeArc" class="gauge-arc" cx="60" cy="60" r="46"></circle>
-              </svg>
+      <div class="row">
+        <button id="copyBtn" class="btn btn-primary">Copy Pack</button>
+        <button id="downloadBtn" class="btn btn-primary">Download .txt</button>
+      </div>
 
-              <div class="gauge-center">
-                <div id="scoreNumber" class="score-number">—</div>
-                <div class="score-sub">/ 100</div>
-                <div id="scoreLabel" class="score-label">Not scored yet</div>
-              </div>
-            </div>
+      <pre id="output" class="output">Run the generator to create your listing pack.</pre>
+    </section>
 
-            <div class="card-foot">
-              <div class="stat">
-                <div class="stat-k">Last run</div>
-                <div id="lastRun" class="stat-v">—</div>
-              </div>
-              <div class="stat">
-                <div class="stat-k">Confidence</div>
-                <div id="confidence" class="stat-v">—</div>
-              </div>
-            </div>
-          </div>
+    <!-- BILLING -->
+    <section id="billing" class="page hidden">
+      <h2>Billing</h2>
 
-          <div class="card">
-            <div class="card-head">
-              <h3>Listings Generated</h3>
-              <span class="chip chip-purple">Momentum</span>
-            </div>
-
-            <div class="big-metric">
-              <div id="countDisplay" class="big-number">0</div>
-              <div class="big-sub">total runs</div>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="list">
-              <div class="list-row">
-                <span class="dot dot-gold"></span>
-                <div>
-                  <div class="list-title">Next best action</div>
-                  <div class="list-sub">Generate a new listing from the Generator tab.</div>
-                </div>
-              </div>
-
-              <div class="list-row">
-                <span class="dot dot-purple"></span>
-                <div>
-                  <div class="list-title">Goal</div>
-                  <div class="list-sub">Run 5 listings — refine based on the score feedback.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="generator" class="page hidden">
-        <h2 class="page-title">Listing Generator</h2>
-        <p class="page-sub">Choose outputs, hit generate, get an optimized listing pack.</p>
-
-        <div class="grid-2">
-          <div class="card">
-            <div class="card-head">
-              <h3>Listing Inputs</h3>
-              <span class="chip chip-gold">Core</span>
-            </div>
-
-            <label class="field">
-              <span>Product name</span>
-              <input id="product" placeholder="e.g., Faceless Couple Portrait" />
-            </label>
-
-            <label class="field">
-              <span>Target buyer</span>
-              <input id="buyer" placeholder="e.g., Busy moms, couples, anniversary shoppers" />
-            </label>
-
-            <label class="field">
-              <span>Top benefits (one per line)</span>
-              <textarea id="benefits" placeholder="Instant download&#10;High-quality PNG&#10;Perfect gift"></textarea>
-            </label>
-
-            <label class="field">
-              <span>Main keywords (comma-separated)</span>
-              <input id="keywords" placeholder="e.g., faceless portrait, anniversary gift, couple art" />
-            </label>
-
-            <div class="row">
-              <label class="field">
-                <span>Tone</span>
-                <select id="tone">
-                  <option value="luxury">Luxury / premium</option>
-                  <option value="friendly">Friendly / warm</option>
-                  <option value="bold">Bold / punchy</option>
-                </select>
-              </label>
-
-              <label class="field">
-                <span>Platform</span>
-                <select id="platform">
-                  <option value="etsy">Etsy</option>
-                  <option value="beacons">Beacons</option>
-                  <option value="shopify">Shopify</option>
-                </select>
-              </label>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-head">
-              <h3>Outputs</h3>
-              <span class="chip chip-purple">Select what to generate</span>
-            </div>
-
-            <div class="checks">
-              <label class="check"><input id="optTitle" type="checkbox" checked /> Title</label>
-              <label class="check"><input id="optDesc" type="checkbox" checked /> Description</label>
-              <label class="check"><input id="optTags" type="checkbox" checked /> Tags</label>
-              <label class="check"><input id="optAlt" type="checkbox" checked /> Image Alt Text</label>
-              <label class="check"><input id="optAccess" type="checkbox" /> Access File Copy</label>
-              <label class="check"><input id="optSocial" type="checkbox" /> Social Captions (3)</label>
-            </div>
-
-            <div class="divider"></div>
-
-            <button id="generateBtn" class="btn btn-gradient">
-              Generate Optimized Listing
-            </button>
-
-            <div class="hint">
-              Score updates + confetti triggers on successful generation.
-            </div>
-          </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Free Plan</h3>
+          <p>Dashboard only</p>
+          <button class="btn btn-primary" disabled>Current</button>
         </div>
 
         <div class="card">
-          <div class="card-head">
-            <h3>Generated Output</h3>
-            <span id="statusChip" class="chip chip-muted">Idle</span>
-          </div>
-
-          <!-- Loading UI -->
-          <div id="loadingBox" class="loading hidden" aria-live="polite">
-            <div class="loading-top">
-              <div id="loadingText" class="loading-text">Optimizing…</div>
-              <div id="loadingPct" class="loading-pct">0%</div>
-            </div>
-            <div class="shimmer-bar">
-              <div id="shimmerFill" class="shimmer-fill"></div>
-            </div>
-            <div id="loadingStep" class="loading-step">Preparing…</div>
-          </div>
-
-          <pre id="output" class="output">Run the generator to create your listing pack.</pre>
+          <h3>Premium Plan</h3>
+          <p>Unlimited listings, export, scorecard</p>
+          <button id="upgradeBtn" class="btn btn-gradient">Upgrade with Stripe</button>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="billing" class="page hidden">
-        <h2 class="page-title">Billing</h2>
-        <p class="page-sub">Subscription structure placeholder (Stripe-ready later).</p>
+    <!-- SETTINGS -->
+    <section id="settings" class="page hidden">
+      <h2>Settings</h2>
+      <p>Brand locked: Ericassetapartstudio</p>
+    </section>
 
-        <div class="grid-2">
-          <div class="card">
-            <div class="card-head">
-              <h3>Plan</h3>
-              <span class="chip chip-gold">Premium</span>
-            </div>
-            <p class="muted">You’re in demo mode. When you’re ready, we can connect Stripe.</p>
-            <ul class="bullets">
-              <li>Unlimited listing generations</li>
-              <li>Scorecard + dopamine feedback</li>
-              <li>Access file + social outputs</li>
-            </ul>
-          </div>
+    <!-- FOOTER -->
+    <footer class="app-footer">
+      © 2026 Ericassetapartstudio. All rights reserved.
+    </footer>
 
-          <div class="card">
-            <div class="card-head">
-              <h3>Invoices</h3>
-              <span class="chip chip-muted">Coming soon</span>
-            </div>
-            <p class="muted">Invoices and receipts will show here.</p>
-          </div>
-        </div>
-      </section>
+  </main>
+</div>
 
-      <section id="settings" class="page hidden">
-        <h2 class="page-title">Settings</h2>
-        <p class="page-sub">App preferences placeholder.</p>
-
-        <div class="card">
-          <div class="card-head">
-            <h3>Brand</h3>
-            <span class="chip chip-purple">Locked</span>
-          </div>
-          <p class="muted">
-            Header and footer are locked across all pages.
-          </p>
-
-          <div class="divider"></div>
-
-          <div class="row">
-            <label class="field">
-              <span>Company name</span>
-              <input value="Ericassetapartstudio" disabled />
-            </label>
-            <label class="field">
-              <span>Footer</span>
-              <input value="© 2026 Ericassetapartstudio. All rights reserved." disabled />
-            </label>
-          </div>
-        </div>
-      </section>
-
-      <!-- FOOTER (LOCKED) -->
-      <footer class="app-footer">
-        © 2026 Ericassetapartstudio. All rights reserved.
-      </footer>
-
-    </main>
-  </div>
-
-  <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
