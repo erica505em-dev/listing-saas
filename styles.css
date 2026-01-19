@@ -1,25 +1,97 @@
 body {
+  margin:0;
   font-family: Arial, sans-serif;
-  padding: 30px;
-  background: #f9f9f9;
+  background:#0b0f1a;
+  color:white;
+}
+
+.hidden { display:none; }
+
+.login {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  gap:10px;
+}
+
+.login input {
+  padding:10px;
+  width:250px;
+}
+
+.login button {
+  padding:10px 20px;
+  cursor:pointer;
+}
+
+.app {
+  display:flex;
+  height:100vh;
+}
+
+.sidebar {
+  width:220px;
+  background:#050914;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.sidebar button {
+  padding:10px;
+  background:#0f172a;
+  color:white;
+  border:none;
+  cursor:pointer;
+}
+
+.main {
+  flex:1;
+  padding:25px;
+}
+
+.page { display:none; }
+.page.active { display:block; }
+
+.cards {
+  display:flex;
+  gap:20px;
+}
+
+.card {
+  background:#0f172a;
+  padding:20px;
+  border-radius:12px;
+  width:200px;
+}
+
+.big {
+  font-size:32px;
+  font-weight:bold;
 }
 
 input, textarea {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 10px;
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
+  background:#020617;
+  color:white;
+  border:1px solid #1e293b;
 }
 
 button {
-  padding: 10px 15px;
-  cursor: pointer;
-  background: #333;
-  color: white;
-  border: none;
+  background:#6366f1;
+  color:white;
+  border:none;
+  padding:10px 15px;
+  cursor:pointer;
 }
 
 pre {
-  background: #eee;
-  padding: 15px;
-  margin-top: 15px;
+  background:#020617;
+  padding:15px;
+  margin-top:15px;
 }
