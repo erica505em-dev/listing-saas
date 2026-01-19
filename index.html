@@ -1,132 +1,154 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Ericassetapartstudio SaaS</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="styles.css">
+<style>
+body{margin:0;font-family:Arial;background:#0B0F1A;color:#E5E7EB}
+.login{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;background:#0B0F1A;z-index:10}
+.login-box{background:#111827;padding:30px;border-radius:10px;width:340px;text-align:center}
+input,textarea{width:100%;padding:10px;margin:8px 0;background:#020617;border:1px solid #1E293B;color:white;border-radius:6px}
+button{padding:10px;border-radius:6px;border:none;font-weight:bold;cursor:pointer}
+.primary{background:linear-gradient(90deg,#6366F1,#F5C77A);color:white}
+.app{display:none;height:100vh}
+.sidebar{width:220px;background:#050914;padding:20px}
+.sidebar button{width:100%;margin:6px 0;background:#111827;color:white;padding:10px;border-radius:6px;text-align:left}
+.sidebar button.active{border:1px solid #6366F1}
+.main{flex:1;padding:20px}
+header{border-bottom:1px solid #1E293B;margin-bottom:20px}
+footer{border-top:1px solid #1E293B;margin-top:20px;padding-top:10px;color:#94A3B8;font-size:12px}
+.hidden{display:none}
+.output{background:#020617;border:1px solid #1E293B;padding:10px;border-radius:6px;white-space:pre-wrap}
+.row{display:flex;gap:10px}
+.row button{flex:1}
+.big{font-size:36px;color:#F5C77A;font-weight:bold}
+</style>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div id="loginScreen" class="login">
-  <div class="login-card">
+<div id="login" class="login">
+  <div class="login-box">
     <h2>Ericassetapartstudio</h2>
-    <p class="login-sub">Digital Product Intelligence Platform</p>
     <input id="email" placeholder="Email">
     <input id="password" type="password" placeholder="Password">
-    <button id="loginBtn" class="btn btn-gradient">Login</button>
-    <p class="login-note">Demo mode — any email/password works</p>
+    <button id="loginBtn" class="primary">Login</button>
+    <p style="font-size:12px;color:#94A3B8">Any email/password works</p>
   </div>
 </div>
 
-<canvas id="confettiCanvas" class="confetti"></canvas>
-
 <div id="app" class="app">
+  <div class="sidebar">
+    <button class="nav active" data="dash">📊 Dashboard</button>
+    <button class="nav" data="gen">⚡ Generator</button>
+    <button class="nav" data="bill">💳 Billing</button>
+    <button class="nav" data="set">⚙️ Settings</button>
+    <p style="margin-top:20px;font-size:12px">Plan: <span id="plan">Free</span></p>
+  </div>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <h3 class="brand">Ericassetapartstudio</h3>
-
-    <button class="nav-btn active" data-page="dashboard">📊 Dashboard</button>
-    <button class="nav-btn" data-page="generator">⚡ Generator</button>
-    <button class="nav-btn" data-page="billing">💳 Billing</button>
-    <button class="nav-btn" data-page="settings">⚙️ Settings</button>
-
-    <div class="sidebar-bottom">
-      <p class="mini">Status: <span id="planStatus">Free</span></p>
-    </div>
-  </aside>
-
-  <!-- MAIN -->
-  <main class="main">
-
-    <!-- HEADER -->
-    <header class="app-header">
-      <div>
-        <h1>Ericassetapartstudio</h1>
-        <p class="tagline">Digital Product Intelligence Platform</p>
-      </div>
-      <span id="headerBadge" class="badge">Ready</span>
+  <div class="main">
+    <header>
+      <h2>Ericassetapartstudio</h2>
+      <p style="font-size:12px;color:#94A3B8">Digital Product Intelligence Platform</p>
     </header>
 
-    <!-- DASHBOARD -->
-    <section id="dashboard" class="page">
-      <h2>Dashboard</h2>
-
-      <div class="grid-2">
-        <div class="card">
-          <h3>Listing Score</h3>
-          <div id="scoreNumber" class="big-number">—</div>
-        </div>
-
-        <div class="card">
-          <h3>Listings Generated</h3>
-          <div id="countDisplay" class="big-number">0</div>
-        </div>
-      </div>
+    <section id="dash">
+      <h3>Dashboard</h3>
+      <div class="big" id="score">—</div>
+      <p>Listings Generated: <span id="count">0</span></p>
     </section>
 
-    <!-- GENERATOR -->
-    <section id="generator" class="page hidden">
-      <h2>Listing Generator</h2>
-
+    <section id="gen" class="hidden">
+      <h3>Listing Generator</h3>
       <input id="product" placeholder="Product name">
       <input id="buyer" placeholder="Target buyer">
       <textarea id="benefits" placeholder="Benefits (one per line)"></textarea>
-
-      <div class="checks">
-        <label><input id="optTitle" type="checkbox" checked> Title</label>
-        <label><input id="optDesc" type="checkbox" checked> Description</label>
-        <label><input id="optTags" type="checkbox" checked> Tags</label>
-        <label><input id="optAlt" type="checkbox" checked> Alt Text</label>
-        <label><input id="optAccess" type="checkbox"> Access File</label>
-        <label><input id="optSocial" type="checkbox"> Social Captions</label>
-      </div>
-
-      <button id="generateBtn" class="btn btn-gradient">Generate Optimized Listing</button>
+      <button id="generate" class="primary">Generate</button>
 
       <div class="row">
-        <button id="copyBtn" class="btn btn-primary">Copy Pack</button>
-        <button id="downloadBtn" class="btn btn-primary">Download .txt</button>
+        <button id="copy">Copy</button>
+        <button id="download">Download</button>
       </div>
 
-      <pre id="output" class="output">Run the generator to create your listing pack.</pre>
+      <pre id="out" class="output">Waiting for generation...</pre>
     </section>
 
-    <!-- BILLING -->
-    <section id="billing" class="page hidden">
-      <h2>Billing</h2>
-
-      <div class="grid-2">
-        <div class="card">
-          <h3>Free Plan</h3>
-          <p>Dashboard only</p>
-          <button class="btn btn-primary" disabled>Current</button>
-        </div>
-
-        <div class="card">
-          <h3>Premium Plan</h3>
-          <p>Unlimited listings, export, scorecard</p>
-          <button id="upgradeBtn" class="btn btn-gradient">Upgrade with Stripe</button>
-        </div>
-      </div>
+    <section id="bill" class="hidden">
+      <h3>Billing</h3>
+      <p>Upgrade to Premium</p>
+      <button id="upgrade" class="primary">Upgrade (Stripe later)</button>
     </section>
 
-    <!-- SETTINGS -->
-    <section id="settings" class="page hidden">
-      <h2>Settings</h2>
-      <p>Brand locked: Ericassetapartstudio</p>
+    <section id="set" class="hidden">
+      <h3>Settings</h3>
+      <p>Brand locked</p>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="app-footer">
+    <footer>
       © 2026 Ericassetapartstudio. All rights reserved.
     </footer>
-
-  </main>
+  </div>
 </div>
 
-<script src="app.js"></script>
+<script>
+var plan="free";
+
+function show(id){
+  ["dash","gen","bill","set"].forEach(x=>document.getElementById(x).classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+}
+
+document.getElementById("loginBtn").onclick=function(){
+  document.getElementById("login").style.display="none";
+  document.getElementById("app").style.display="flex";
+};
+
+document.querySelectorAll(".nav").forEach(b=>{
+  b.onclick=function(){
+    document.querySelectorAll(".nav").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active");
+    show(b.getAttribute("data"));
+  };
+});
+
+document.getElementById("generate").onclick=function(){
+  if(plan!=="premium"){
+    document.getElementById("out").textContent="Upgrade to Premium to use generator.";
+    show("bill");
+    return;
+  }
+
+  var p=product.value;
+  var b=buyer.value;
+  var ben=benefits.value.split("\n");
+
+  var txt="TITLE:\\n"+p+" for "+b+"\\n\\nDESCRIPTION:\\n";
+  ben.forEach(x=>txt+="• "+x+"\\n");
+
+  out.textContent=txt;
+
+  var s=Math.floor(80+Math.random()*18);
+  score.textContent=s;
+  count.textContent=parseInt(count.textContent)+1;
+};
+
+copy.onclick=function(){
+  navigator.clipboard.writeText(out.textContent);
+  alert("Copied");
+};
+
+download.onclick=function(){
+  var a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([out.textContent],{type:"text/plain"}));
+  a.download="listing-pack.txt";
+  a.click();
+};
+
+upgrade.onclick=function(){
+  plan="premium";
+  document.getElementById("plan").textContent="Premium";
+  alert("Premium unlocked");
+};
+</script>
+
 </body>
 </html>
