@@ -4,27 +4,7 @@
 <meta charset="UTF-8">
 <title>Ericassetapartstudio SaaS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<style>
-body{margin:0;font-family:Arial;background:#0B0F1A;color:#E5E7EB}
-.login{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;background:#0B0F1A;z-index:10}
-.login-box{background:#111827;padding:30px;border-radius:10px;width:340px;text-align:center}
-input,textarea{width:100%;padding:10px;margin:8px 0;background:#020617;border:1px solid #1E293B;color:white;border-radius:6px}
-button{padding:10px;border-radius:6px;border:none;font-weight:bold;cursor:pointer}
-.primary{background:linear-gradient(90deg,#6366F1,#F5C77A);color:white}
-.app{display:none;height:100vh}
-.sidebar{width:220px;background:#050914;padding:20px}
-.sidebar button{width:100%;margin:6px 0;background:#111827;color:white;padding:10px;border-radius:6px;text-align:left}
-.sidebar button.active{border:1px solid #6366F1}
-.main{flex:1;padding:20px}
-header{border-bottom:1px solid #1E293B;margin-bottom:20px}
-footer{border-top:1px solid #1E293B;margin-top:20px;padding-top:10px;color:#94A3B8;font-size:12px}
-.hidden{display:none}
-.output{background:#020617;border:1px solid #1E293B;padding:10px;border-radius:6px;white-space:pre-wrap}
-.row{display:flex;gap:10px}
-.row button{flex:1}
-.big{font-size:36px;color:#F5C77A;font-weight:bold}
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -111,93 +91,6 @@ Built with strategy by Ericassetapartstudio™<br>
 </div>
 </div>
 
-<!-- JS -->
-<script>
-let plan = "free";
-
-// LOGIN
-document.getElementById("loginBtn").addEventListener("click", () => {
-  document.getElementById("login").style.display = "none";
-  document.getElementById("app").style.display = "flex";
-});
-
-// NAV
-document.querySelectorAll(".nav").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".nav").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    show(btn.getAttribute("data"));
-  });
-});
-
-function show(id){
-  ["dash","gen","bill","set"].forEach(x=>{
-    document.getElementById(x).classList.add("hidden");
-  });
-  document.getElementById(id).classList.remove("hidden");
-}
-
-// GENERATE
-document.getElementById("generate").addEventListener("click", () => {
-
-  if(plan !== "premium"){
-    document.getElementById("out").textContent =
-      "Upgrade to Premium to use generator.";
-    show("bill");
-    return;
-  }
-
-  const product = document.getElementById("product").value || "Your Product";
-  const buyer = document.getElementById("buyer").value || "Your Buyer";
-  const benefits = document.getElementById("benefits").value.split("\n");
-
-  let text =
-`AI STRATEGIC OUTPUT
-
-TITLE:
-${product} for ${buyer}
-
-DESCRIPTION:
-`;
-
-  benefits.forEach(b=>{
-    if(b.trim() !== "") text += "• " + b + "\n";
-  });
-
-  text += "\nSTATUS: Strategic optimization complete.";
-
-  document.getElementById("out").textContent = text;
-
-  const score = Math.floor(80 + Math.random()*18);
-  document.getElementById("score").textContent = score;
-
-  const countEl = document.getElementById("count");
-  countEl.textContent = parseInt(countEl.textContent) + 1;
-});
-
-// COPY
-document.getElementById("copy").addEventListener("click", () => {
-  navigator.clipboard.writeText(document.getElementById("out").textContent);
-  alert("Copied to clipboard");
-});
-
-// DOWNLOAD
-document.getElementById("download").addEventListener("click", () => {
-  const text = document.getElementById("out").textContent;
-  const blob = new Blob([text], { type:"text/plain" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "listing-pack.txt";
-  a.click();
-});
-
-// BILLING
-document.getElementById("upgrade").addEventListener("click", () => {
-  plan = "premium";
-  document.getElementById("plan").textContent = "Premium";
-  alert("Premium unlocked");
-});
-</script>
-
+<script src="app.js" defer></script>
 </body>
 </html>
