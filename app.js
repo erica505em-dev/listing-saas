@@ -24,13 +24,7 @@ function show(id){
 
 // ---------- GENERATOR ----------
 document.getElementById("generate").addEventListener("click", () => {
-
-  if(plan !== "premium"){
-    document.getElementById("out").textContent =
-      "Upgrade to Premium to use generator.";
-    show("bill");
-    return;
-  }
+  const isPremium = plan === "premium";
 
   const product = document.getElementById("product").value || "Your Product";
   const buyer = document.getElementById("buyer").value || "Your Buyer";
@@ -50,6 +44,10 @@ DESCRIPTION:
   });
 
   text += "\nSTATUS: Strategic optimization complete.";
+
+  if(!isPremium){
+    text += "\n\nNOTE: Upgrade to Premium to unlock full generation access.";
+  }
 
   document.getElementById("out").textContent = text;
 
