@@ -1,0 +1,10 @@
+UPLOAD THIS FOLDER TO NETLIFY
+
+1) In Netlify, choose “Deploy manually”.
+2) Drag and drop THIS "netlify" folder.
+3) Wait for the deploy to finish, then open the live URL.
+
+This folder already contains:
+- index.html
+- styles.css
+- app.js
